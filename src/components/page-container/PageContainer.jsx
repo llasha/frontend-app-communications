@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 
-import { LearningHeader as Header } from '@edx/frontend-component-header';
 import { FooterSlot } from '@edx/frontend-component-footer';
 import { Spinner } from '@openedx/paragon';
 
 import { getCohorts, getCourseHomeCourseMetadata } from './data/api';
 
 import './PageContainer.scss';
+import HeaderSlot from '../../plugin-slots/HeaderSlot';
 
 export const CourseMetadataContext = React.createContext();
 
@@ -61,8 +61,7 @@ export default function PageContainer(props) {
     return (
       <CourseMetadataContext.Provider value={courseMetadata}>
         <>
-          <Header
-            className="learning-header"
+          <HeaderSlot
             courseOrg={courseMetadata.org}
             courseNumber={courseMetadata.number}
             courseTitle={courseMetadata.title}
