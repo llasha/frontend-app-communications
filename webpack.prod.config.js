@@ -1,4 +1,6 @@
+const path = require('path');
 const { createConfig } = require('@openedx/frontend-build');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const config = createConfig('webpack-prod');
 
@@ -17,5 +19,16 @@ const webpack5esmInteropRule = {
 const otherRules = config.module.rules;
 
 config.module.rules = [webpack5esmInteropRule, ...otherRules];
+
+config.plugins.push(
+  new CopyPlugin({
+    patterns: [
+      {
+        from: path.resolve(__dirname, './public/static'),
+        to: path.resolve(__dirname, './dist/static'),
+      },
+    ],
+  }),
+);
 
 module.exports = config;
